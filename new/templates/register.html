@@ -1,0 +1,163 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container d-flex justify-content-center align-items-start min-vh-100 pt-5">
+        <div class="content-section w-100 p-4 p-md-5 shadow-lg rounded">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4 text-center h4 signup">Join Today</legend>
+
+                    <!-- Username Field -->
+                    <div class="form-group mb-3">
+                        {{ form.username.label(class="form-control-label text-dark") }} 
+                        {% if form.username.errors %}
+                            {{ form.username(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="form-group mb-3">
+                        {{ form.email.label(class="form-control-label text-dark") }} 
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="form-group mb-3">
+                        {{ form.password.label(class="form-control-label text-dark") }} 
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div class="form-group mb-4">
+                        {{ form.confirm_password.label(class="form-control-label text-dark") }} 
+                        {% if form.confirm_password.errors %}
+                            {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.confirm_password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.confirm_password(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+
+                <!-- Submit Button -->
+                <div class="form-group mb-4">
+                    {{ form.submit(class=" btn-outline-primary  w-100 py-2") }}
+                </div>
+            </form>
+
+            <!-- Login Redirect -->
+            <div class="border-top pt-3 text-center">
+                <small class="text-muted">
+                    Already have an account? <a href="{{ url_for('users.login') }}" class="text-primary-link">Login</a>
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Customizing the overall form container */
+        .content-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+
+        .signup{
+            font-size: 2rem;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        /* Style for form elements */
+        .form-control {
+            border-radius: 8px;
+            box-shadow: none;
+            border: 1px solid #ced4da;
+            transition: all 0.3s ease;
+        }
+       
+
+        
+        /* Input validation styles */
+        .form-control.is-invalid {
+            border-color: #e74a3b;
+        }
+
+        /* Styling for submit button */
+        .btn-outline-primary {
+            border-color: #333;
+            color: #333;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .btn-outline-primary:hover {
+            border-color: #333;
+            background-color: #333;
+            color: #fff;
+        }
+        .btn-outline-primary:focus{
+            background-color: #555;
+        }
+        /*
+
+        /* Login link styles */
+        .text-primary-link {
+            border-color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .text-primary-link:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+        
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .form-control {
+                font-size: 1rem;
+            }
+
+            .h4 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+{% endblock content %}

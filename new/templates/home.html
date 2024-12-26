@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5" style="min-height: 65vh;">
+    <div class="mb-5">
+        {% if posts.items %}
+            <div class="row justify-content-center">
+                {% for post in posts.items %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body p-4" style="height: 10rem;">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img id="postimg" class="rounded-circle border" 
+                                         src="{{ url_for('static', filename='profile_pics/' + (post.author.image_file if post.author.image_file else 'default.jpg')) }}" 
+                                         alt="Profile picture" 
+                                         style="max-height: 50px; object-fit: cover;" width="50" height="50">
+                                    <div class="ms-3">
+                                        <a href="{{ url_for('users.user_posts', username=post.author.username) }}" 
+                                           class="text-dark fw-bold">{{ post.author.username }}</a>
+                                        <small class="text-muted d-block">{{ post.date_posted.strftime('%b %d, %Y') }}</small>
+                                    </div>
+                                </div>
+                                <h5 class="card-title text-primary">
+                                    <a href="{{ url_for('posts.post_detail', post_id=post.id) }}" 
+                                       class="text-dark text-decoration-none">{{ post.title }}</a>
+                                </h5>
+                                <a href="{{ url_for('posts.post_detail', post_id=post.id) }}" 
+                                   class="read-more-link btn-sm">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-muted fw-light">No posts available at the moment. Please check back later.</p>
+        {% endif %}
+
+        <nav aria-label="Page navigation" class="pagination-wrapper">
+            <ul class="pagination justify-content-center">
+                {% if posts.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('main.home', page=posts.prev_num) }}">Previous</a>
+                    </li>
+                {% endif %}
+                
+                {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        <li class="page-item {% if posts.page == page_num %}active{% endif %}">
+                            <a class="page-link" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if posts.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('main.home', page=posts.next_num) }}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<style>
+    .pagination-wrapper {
+        margin-top: 2rem;
+    }
+
+    .pagination {
+        gap: 5px;
+    }
+
+    .page-link {
+        border-radius: 30px;
+        padding: 8px 16px;
+        color: #333;
+        border: 1px solid #dee2e6;
+        background: white;
+        min-width: 40px;
+        text-align: center;
+    }
+
+    .page-item.active .page-link {
+        background-color: #333;
+        border-color: #333;
+        color: white;
+    }
+
+    .page-item.disabled .page-link {
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    .read-more-link {
+        color: #333;
+        font-weight: 500;
+        font-size: medium;
+        text-decoration: none;
+    }
+
+    .read-more-link:hover {
+        text-decoration: underline;
+    }
+
+    .card {
+        height: 100%;
+    }
+</style>
+{% endblock content %}

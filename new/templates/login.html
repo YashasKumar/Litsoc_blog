@@ -1,0 +1,147 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="content-section w-100 p-md-5 shadow-lg rounded">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4 text-center h4 login">Login</legend>
+
+                <!-- Email Field -->
+                <div class="form-group mb-3">
+                    {{ form.email.label(class="form-control-label") }} 
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group mb-3">
+                    {{ form.password.label(class="form-control-label") }} 
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+
+            <!-- Remember Me and Forgot Password -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+                <a href="{{ url_for('users.reset_request') }}" class="forgot-password">Forgot password?</a>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group mb-4">
+                {{ form.submit(class="btn btn-outline-info w-100 py-2") }}
+            </div>
+        </form>
+
+        <!-- Registration Link -->
+        <div class="text-center mt-4">
+            <small class="text-muted">
+                Don’t have an account? <a href="{{ url_for('users.register') }}" class="text-info">Sign up</a>
+            </small>
+        </div>
+    </div>
+</div>
+
+<style>
+    .content-section {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        color: #333;
+        margin: 4.75rem auto;
+    }
+
+    .login {
+        font-size: 2rem;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        color: #333;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #555;
+        box-shadow: 0 0 0 0.2rem rgba(85, 85, 85, 0.25);
+    }
+
+    .form-control.is-invalid {
+        border-color: #e74a3b;
+        background-color: #ffe6e6;
+    }
+
+    .btn-outline-info {
+        border-color: #333;
+        color: #333;
+        border-radius: 20px;
+        background-color: #f0f0f0;
+        font-weight: 500;
+    }
+
+    .btn-outline-info:hover {
+        border-color: #333;
+        background-color: #333;
+        color: #fff;
+    }
+
+    .text-info {
+        text-decoration: none;
+        font-weight: 600;
+        color: #555;
+    }
+
+    .text-info:hover {
+        text-decoration: underline;
+        color: #333;
+    }
+
+    .forgot-password {
+        color: #555;
+    }
+
+    .forgot-password:hover {
+        text-decoration: underline;
+        color: #333;
+    }
+
+    @media (max-width: 768px) {
+        .content-section {
+            padding: 1.5rem;
+        }
+
+        .form-control {
+            font-size: 1rem;
+        }
+
+        .h4 {
+            font-size: 1.25rem;
+        }
+    }
+</style>
+{% endblock content %}

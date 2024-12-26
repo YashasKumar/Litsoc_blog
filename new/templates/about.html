@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- About Section -->
+<section class="about-section">
+    <div class="container">
+        <!-- Page Title -->
+        <h1 class="text-center heading-text">
+            Discover LITSOC
+        </h1>
+        
+        <!-- About Content Card -->
+        <div class="card about-card">
+            <!-- Welcome Message -->
+            <h2 class="welcome-text">
+                Welcome to LITSOC
+            </h2>
+            
+            <!-- Introductory Paragraph -->
+            <p class="intro-text">
+                LITSOC is not just a blogging platform—it’s a vibrant community that celebrates the power of ideas and stories. Connect, share perspectives, and inspire one another in a welcoming environment.
+            </p>
+            
+            <!-- Mission Statement -->
+            <h3 class="mission-text">
+                Our Mission
+            </h3>
+            <ul class="mission-description">
+                <li>Empower individuals to express themselves creatively.</li>
+                <li>Foster a community that educates and entertains.</li>
+                <li>Encourage connections through shared stories.</li>
+            </ul>
+            
+            <!-- Vision -->
+            <h3 class="vision-text">
+                Our Vision
+            </h3>
+            <p class="vision-description">
+                We envision a world where stories bridge gaps, inspire change, and foster understanding. Through LITSOC, we aim to make blogging accessible and rewarding for creators across the globe.
+            </p>
+            
+            <!-- Testimonial -->
+            <blockquote class="testimonial">
+                <em>
+                    "LITSOC has transformed my writing journey. It's a place where my voice is heard and valued." - A Happy Member
+                </em>
+            </blockquote>
+            
+            <!-- Call to Action -->
+            <div class="text-center mt-4">
+                <a href="{{ url_for('users.register') }}" class="btn btn-cta">
+                    Join LITSOC Today
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+
+/* Professional Card Design */
+.about-card {
+    background: #fff; /* white background for the card */
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 30px;
+    padding: 2.3rem;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s ease-in-out;
+    border: 1px solid #ddd; /* light border */
+}
+
+.about-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 10px 20px rgba(0, 0, 0, 0.1);
+}
+</style>
+{% endblock content %}
