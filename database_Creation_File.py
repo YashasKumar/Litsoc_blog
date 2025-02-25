@@ -1,8 +1,10 @@
 from new import db, create_app
+import os
 app = create_app()
 
 with app.app_context():
-    db.create_all()
+    if not os.path.exists("/tmp/database.db"):
+        db.create_all()
     # user_1 = User(username = 'Yashas', email = 'X@demo.com', password = 'password')
     # db.session.add(user_1)
     # db.session.commit()   #Makes changes in the database properly
