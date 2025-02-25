@@ -1,7 +1,7 @@
 import os
 
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key')  # Use environment variable
+    SECRET_KEY = os.getenv('SECRET_KEY', 'Hello')  # Use environment variable
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:////tmp/database.db')  # Read DB URI from env
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
