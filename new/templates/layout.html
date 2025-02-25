@@ -14,13 +14,31 @@
     <title>Welcome to the Blog</title>
     {% endif %}
     <meta name="description" content="A personal blog to share knowledge on various topics.">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        footer {
+            flex-shrink: 0;
+            margin-top: auto;
+            
+        }
+    </style>
 </head>
 
 <body>
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark shadow">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Yashas Medium</a>
+                <a class="navbar-brand" href="/">LITSOC</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -53,11 +71,11 @@
         </div>
     </main>
 
-    <footer class="bg-dark text-white mt-5">
+    <footer class="bg-dark text-white">
         <div class="container py-4">
             <div class="row">
                 <div class="col-md-6">
-                    <p>&copy; 2024 Yashas Medium | All Rights Reserved</p>
+                    <p>&copy; 2024 Litsoc | All Rights Reserved</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container mt-5" style="min-height: 65vh;">
+<div class="container mt-5">
     <h1 class="text-center mb-5">Posts by {{ user.username }}</h1>
 
     <div class="posts-container">
@@ -28,7 +28,7 @@
                     </h2>
 
                     <!-- Post Excerpt -->
-                    <p class="post-excerpt" style="width: 350px;">
+                    <p class="post-excerpt">
                         <a href="{{ url_for('posts.post_detail', post_id = post.id) }}" class="read-more-link">Read more</a>
                     </p>
                 </div>
@@ -184,7 +184,6 @@
     }
 
     .container {
-        min-height: calc(100vh - 100px);
         display: flex;
         flex-direction: column;
     }

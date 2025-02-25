@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <h1 class="mb-4 fw-bold text-dark">{{ post.title }}</h1>
+            <h1 class="mb-4 fw-bold text-dark post-title">{{ post.title }}</h1>
 
             <div class="post-content text-muted">
                 {{ post.content | safe }}
@@ -25,14 +25,18 @@
             {% if post.media_filename %}
             <div class="media-container mt-4">
                 {% if post.media_filename.endswith(('jpg', 'jpeg', 'png', 'gif')) %}
-                <img src="{{ url_for('static', filename='media/' + post.media_filename) }}" 
-                     alt="Post Media" 
-                     class="img-fluid rounded-3 shadow-sm" style="max-height: 500px; object-fit: cover;">
+                <div class="image-wrapper">
+                    <img src="{{ url_for('static', filename='media/' + post.media_filename) }}" 
+                         alt="Post Media" 
+                         class="post-image">
+                </div>
                 {% elif post.media_filename.endswith(('mp4', 'avi')) %}
-                <video controls class="w-100 rounded-3 shadow-sm">
-                    <source src="{{ url_for('static', filename='media/' + post.media_filename) }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <div class="video-wrapper">
+                    <video controls class="post-video">
+                        <source src="{{ url_for('static', filename='media/' + post.media_filename) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
                 {% elif post.media_filename.endswith(('mp3', 'wav')) %}
                 <audio controls class="w-100 rounded-3 shadow-sm">
                     <source src="{{ url_for('static', filename='media/' + post.media_filename) }}" type="audio/mp3">
@@ -49,9 +53,9 @@
             {% endif %}
 
             {% if current_user == post.author %}
-            <div class="mt-5 d-flex">
+            <div class="mt-5 d-flex flex-wrap gap-2">
                 <a href="{{ url_for('posts.update_post', post_id=post.id) }}" 
-                   class="btn btn-outline-primary me-3 d-flex align-items-center">
+                   class="btn btn-outline-primary d-flex align-items-center">
                     <i class="bi bi-pencil-square me-2"></i> Update Post
                 </a>
                 <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST" class="d-inline">
@@ -74,39 +78,85 @@
         color: #333;
     }
 
+    .container {
+        padding: 0 15px;
+    }
+
     .post-content {
         line-height: 1.8;
         font-size: 1.1rem;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
     
     .post-content [style*="font-size"] {
         font-family: inherit !important;
     }
 
+    .post-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
     .card {
         background-color: white;
-        padding: 30px;
+        padding: 20px;
         border-radius: 12px;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     }
 
     .content-box {
         width: 100%;
+        max-width: 1000px;
         margin: 0 auto;
         margin-bottom: 2.7vh;
     }
 
-    h1 {
+    .post-title {
         font-size: 2.5rem;
+        word-wrap: break-word;
     }
 
     .text-muted {
         color: #555;
     }
 
+    /* Image handling */
+    .image-wrapper {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-image {
+        width: 100%;
+        height: auto;
+        max-height: 500px;
+        object-fit: contain;
+        display: block;
+    }
+
+    /* Video handling */
+    .video-wrapper {
+        width: 100%;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .post-video {
+        width: 100%;
+        max-height: 500px;
+        display: block;
+    }
+
     .btn {
         border-radius: 30px;
         padding: 10px 20px;
+        white-space: nowrap;
     }
 
     .btn-outline-primary {
@@ -122,6 +172,50 @@
     .btn-outline-danger:hover {
         background-color: #dc3545;
         color: #fff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .card {
+            padding: 15px;
+        }
+
+        .post-title {
+            font-size: 2rem;
+        }
+
+        .post-content {
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .container {
+            padding: 0 10px;
+        }
+
+        .post-title {
+            font-size: 1.75rem;
+        }
+
+        .card {
+            padding: 12px;
+        }
+
+        .d-flex.align-items-center.mb-4 {
+            flex-direction: column;
+            align-items: flex-start !important;
+        }
+
+        .ms-3 {
+            margin-left: 0 !important;
+            margin-top: 0.5rem;
+        }
     }
 </style>
 {% endblock content %}
