@@ -18,7 +18,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f'Your account has been created! You should now be able to login!', 'success')
-        return redirect('/')
+        return redirect(url_for('main.home'))
     return render_template("register.html", title = 'Register', form=form)
 
 @users.route('/login', methods = ["GET", "POST"])
